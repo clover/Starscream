@@ -316,7 +316,7 @@ open class WebSocket : NSObject, StreamDelegate {
      */
     open func write(ping: Data, completion: (() -> ())? = nil) {
         guard isConnected else { return }
-        dequeueWrite(ping, code: .ping, writeCompletion: completion)
+        dequeueWrite(ping, code: .ping, priority: .veryHigh, writeCompletion: completion)
     }
 
     /**
@@ -947,7 +947,7 @@ open class WebSocket : NSObject, StreamDelegate {
         if response.isFin && response.bytesLeft <= 0 {
             if response.code == .ping {
                 let data = response.buffer! // local copy so it is perverse for writing
-                dequeueWrite(data as Data, code: .pong)
+                dequeueWrite(data as Data, code: .pong, priority: .veryHigh)
             } else if response.code == .textFrame {
                 let str: NSString? = NSString(data: response.buffer! as Data, encoding: String.Encoding.utf8.rawValue)
                 if str == nil {
@@ -1001,8 +1001,9 @@ open class WebSocket : NSObject, StreamDelegate {
     /**
      Used to write things to the stream
      */
-    private func dequeueWrite(_ data: Data, code: OpCode, writeCompletion: (() -> ())? = nil) {
+    private func dequeueWrite(_ data: Data, code: OpCode, priority: Operation.QueuePriority = .normal, writeCompletion: (() -> ())? = nil) {
         let operation = BlockOperation()
+        operation.queuePriority = priority
         operation.addExecutionBlock { [weak self, weak operation] in
             //stream isn't ready, let's wait
             guard let s = self else { return }
