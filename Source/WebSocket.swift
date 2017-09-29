@@ -241,7 +241,7 @@ public class WebSocket: NSObject, NSStreamDelegate {
     // Yodel a   sound  to the planet.    This sends it as an astroid. http://youtu.be/Eu5ZJELRiJ8?t=42s
     public func writePing(data: NSData, completion: (() -> ())? = nil) {
         guard isConnected else { return }
-        dequeueWrite(data, code: .Ping, writeCompletion: completion)
+        dequeueWrite(data, code: .Ping, writeCompletion: completion, queuePriority: .VeryHigh)
     }
 
     /// Private method that starts the connection.
@@ -737,7 +737,7 @@ public class WebSocket: NSObject, NSStreamDelegate {
         if response.isFin && response.bytesLeft <= 0 {
             if response.code == .Ping {
                 let data = response.buffer! // local copy so it's not perverse for writing
-                dequeueWrite(data, code: OpCode.Pong)
+                dequeueWrite(data, code: OpCode.Pong, queuePriority:.VeryHigh)
             } else if response.code == .TextFrame {
                 let str: NSString? = NSString(data: response.buffer!, encoding: NSUTF8StringEncoding)
                 if str == nil {
@@ -783,8 +783,10 @@ public class WebSocket: NSObject, NSStreamDelegate {
     }
 
     /// Used to write things to the stream.
-    private func dequeueWrite(data: NSData, code: OpCode, writeCompletion: (() -> ())? = nil) {
-        writeQueue.addOperationWithBlock { [weak self] in
+    private func dequeueWrite(data: NSData, code: OpCode, writeCompletion: (() -> ())? = nil, queuePriority:NSOperationQueuePriority = .Normal) {
+        let operation = NSBlockOperation()
+        operation.queuePriority = queuePriority
+        operation.addExecutionBlock{ [weak self] in
             //stream isn't ready, let's wait
             guard let s = self else { return }
             var offset = 2
@@ -843,6 +845,7 @@ public class WebSocket: NSObject, NSStreamDelegate {
             }
 
         }
+        writeQueue.addOperation(operation)
     }
 
     /// Used to preform the disconnect delegate.
