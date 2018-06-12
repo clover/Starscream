@@ -2,6 +2,74 @@
 All notable changes to this project will be documented in this file.
 `Starscream` adheres to [Semantic Versioning](http://semver.org/).
 
+#### [3.0.5](https://github.com/daltoniam/Starscream/tree/3.0.5)
+
+Swift 4.1 support and bug fixes.
+
+Pull Requests:
+[#492](https://github.com/daltoniam/Starscream/pull/492)
+[#461](https://github.com/daltoniam/Starscream/pull/461)
+[#476](https://github.com/daltoniam/Starscream/pull/476)
+
+Issues:
+[#494](https://github.com/daltoniam/Starscream/issues/494)
+[#491](https://github.com/daltoniam/Starscream/issues/491)
+[#474](https://github.com/daltoniam/Starscream/issues/474)
+[#471](https://github.com/daltoniam/Starscream/issues/471)
+[#437](https://github.com/daltoniam/Starscream/issues/437)
+[#445](https://github.com/daltoniam/Starscream/issues/445)
+[#466](https://github.com/daltoniam/Starscream/issues/466)
+
+
+#### [3.0.4](https://github.com/daltoniam/Starscream/tree/3.0.4)
+
+Improved error handling. Timeout fix. Small assorted fixes.
+
+Pull Requests:
+[#452](https://github.com/daltoniam/Starscream/pull/452)
+[#448](https://github.com/daltoniam/Starscream/pull/448)
+[#444](https://github.com/daltoniam/Starscream/pull/444)
+[#443](https://github.com/daltoniam/Starscream/pull/443)
+
+Issues:
+[#415](https://github.com/daltoniam/Starscream/issues/415)
+[#422](https://github.com/daltoniam/Starscream/issues/422)
+[#429](https://github.com/daltoniam/Starscream/issues/429)
+[#433](https://github.com/daltoniam/Starscream/issues/433)
+[#439](https://github.com/daltoniam/Starscream/issues/439)
+
+#### [3.0.3](https://github.com/daltoniam/Starscream/tree/3.0.3)
+
+Assorted fixes.
+
+Pull Requests:
+[#438](https://github.com/daltoniam/Starscream/pull/438)
+[#423](https://github.com/daltoniam/Starscream/pull/423)
+[#420](https://github.com/daltoniam/Starscream/pull/420)
+[#418](https://github.com/daltoniam/Starscream/pull/418)
+[#410](https://github.com/daltoniam/Starscream/pull/410)
+[#405](https://github.com/daltoniam/Starscream/pull/405)
+[#404](https://github.com/daltoniam/Starscream/pull/404)
+[#400](https://github.com/daltoniam/Starscream/pull/400)
+
+Issues:
+[#435](https://github.com/daltoniam/Starscream/issues/435)
+[#431](https://github.com/daltoniam/Starscream/issues/431)
+[#426](https://github.com/daltoniam/Starscream/issues/426)
+[#409](https://github.com/daltoniam/Starscream/issues/409)
+[#408](https://github.com/daltoniam/Starscream/issues/408)
+[#401](https://github.com/daltoniam/Starscream/issues/401)
+[#399](https://github.com/daltoniam/Starscream/issues/399)
+[#378](https://github.com/daltoniam/Starscream/issues/378)
+
+#### [3.0.2](https://github.com/daltoniam/Starscream/tree/3.0.2)
+
+Small fixes for 3.0.1.
+
+[#394](https://github.com/daltoniam/Starscream/issues/394)
+[#392](https://github.com/daltoniam/Starscream/issues/392)
+[#391](https://github.com/daltoniam/Starscream/issues/391)
+
 #### [3.0.1](https://github.com/daltoniam/Starscream/tree/3.0.1)
 
 Small fixes for 3.0.0.

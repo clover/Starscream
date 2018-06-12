@@ -133,6 +133,25 @@ The writePing method is the same as write, but sends a ping control frame.
 socket.write(ping: Data()) //example on how to write a ping control frame over the socket!
 ```
 
+### write a pong frame
+
+
+the writePong method is the same as writePing, but sends a pong control frame.
+
+```swift
+socket.write(pong: Data()) //example on how to write a pong control frame over the socket!
+```
+
+Starscream will automatically respond to incoming `ping` control frames so you do not need to manually send `pong`s.
+
+However if for some reason you need to control this prosses you can turn off the automatic `ping` response by disabling `respondToPingWithPong`.
+
+```swift
+socket.respondToPingWithPong = false //Do not automaticaly respond to incoming pings with pongs.
+```
+
+In most cases you will not need to do this.
+
 ### disconnect
 
 The disconnect method does what you would expect and closes the socket.
@@ -261,7 +280,7 @@ To use Starscream in your project add the following 'Podfile' to your project
 	platform :ios, '9.0'
 	use_frameworks!
 
-	pod 'Starscream', '~> 3.0.0'
+	pod 'Starscream', '~> 3.0.2'
 
 Then run:
 
@@ -283,7 +302,7 @@ $ brew install carthage
 To integrate Starscream into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```
-github "daltoniam/Starscream" >= 3.0.0
+github "daltoniam/Starscream" >= 3.0.2
 ```
 
 ### Rogue
@@ -332,7 +351,7 @@ In most cases you do not need the extra info and should use the normal delegate.
 
 #### websocketDidReceiveMessage
 ```swift
-func websocketDidReceiveMessage(socket: WebSocketClient, text: String, response: WebSocket.WSResponse {
+func websocketDidReceiveMessage(socket: WebSocketClient, text: String, response: WebSocket.WSResponse) {
 	print("got some text: \(text)")
 	print("First frame for this message arrived on \(response.firstFrame)")
 }
