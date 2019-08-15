@@ -144,7 +144,7 @@ socket.write(pong: Data()) //example on how to write a pong control frame over t
 
 Starscream will automatically respond to incoming `ping` control frames so you do not need to manually send `pong`s.
 
-However if for some reason you need to control this prosses you can turn off the automatic `ping` response by disabling `respondToPingWithPong`.
+However if for some reason you need to control this process you can turn off the automatic `ping` response by disabling `respondToPingWithPong`.
 
 ```swift
 socket.respondToPingWithPong = false //Do not automaticaly respond to incoming pings with pongs.
@@ -158,6 +158,12 @@ The disconnect method does what you would expect and closes the socket.
 
 ```swift
 socket.disconnect()
+```
+
+The socket can be forcefully closed, by specifying a timeout (in milliseconds). A timeout of zero will also close the socket immediately without waiting on the server.
+
+```swift
+socket.disconnect(forceTimeout: 10, closeCode: CloseCode.normal.rawValue)
 ```
 
 ### isConnected
@@ -305,6 +311,29 @@ To integrate Starscream into your Xcode project using Carthage, specify it in yo
 github "daltoniam/Starscream" >= 3.0.2
 ```
 
+### Accio
+
+Check out the [Accio](https://github.com/JamitLabs/Accio) docs on how to add a install. 
+
+Add the following to your Package.swift:
+
+```swift
+.package(url: "https://github.com/daltoniam/Starscream.git", .upToNextMajor(from: "3.1.0")),
+```
+
+Next, add `Starscream` to your App targets dependencies like so:
+
+```swift
+.target(
+    name: "App",
+    dependencies: [
+        "Starscream",
+    ]
+),
+```
+
+Then run `accio update`.
+
 ### Rogue
 
 First see the [installation docs](https://github.com/acmacalister/Rogue) for how to install Rogue.
@@ -378,6 +407,10 @@ func  websocketHttpUpgrade(socket: WebSocketClient, response: CFHTTPMessage) {
 	print("the http response has returned.")
 }
 ```
+
+## Swift versions
+
+* Swift 4.2 - 3.0.6
 
 ## KNOWN ISSUES
 - WatchOS does not have the the CFNetwork String constants to modify the stream's SSL behavior. It will be the default Foundation SSL behavior. This means watchOS CANNOT use `SSLCiphers`,  `disableSSLCertValidation`, or SSL pinning. All these values set on watchOS will do nothing. 
